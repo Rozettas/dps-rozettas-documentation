@@ -5,8 +5,8 @@
    * Before opening a feature discussion, please check if the feature already has a thread
    * Please in the title of thread refer to the feature ID, and the feature name###Feature list
 ######NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
-Feature ID |Feature name|Feature importance|Done|Estimated implementation time(hours)| Dependencies|Description
---- |--- |--- |--- |--- |--- |--- |
+|Feature ID|Feature name|Feature importance|Done|Estimated implementation time(hours)| Dependencies|Description
+| ---:| --- | --- | --- | --- | --- | --- |
 #1|Infrastructure|Essential|[ ]| 16 hours| | The IT infrastructure of the webshop
 #2|Database|Very important|[ ]|3 hours| [ ]Infrastructure| The database itself stores and manages every dataset we need
 #3|Customer|Very important|[ ]|6 hours|[ ]Database| Service that handles sensitive customer data
