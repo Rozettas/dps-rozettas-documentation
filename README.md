@@ -1,12 +1,12 @@
-#Rozettas' *Insert random name here* e-shop
+# Rozettas' *Insert random name here* e-shop
 
-#####Usage of this documentation:
+##### Usage of this documentation:
 1. This documentation contains all the features what are approved by the team
 2. Use the Issue tab to make feature request, and make suggestions about the current features
    * Before opening a feature discussion, please check if the feature already has a thread
    * Please in the title of thread refer to the feature ID, and the feature name###Feature list
 
-######NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
+###### NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
 
 |Feature ID|Feature name|Feature importance|Done|Estimated implementation time(hours)| Dependencies|Description
 | ---:| --- | --- | --- | --- | --- | --- |
@@ -17,11 +17,11 @@
 #5|Inventory management|Important|[ ]|16 hours|[ ]Database</br>[ ]Seller| Service that can track the state of the sellers' inventory, possible third-party connections
 #6|Shopping cart|Moderately important|[ ]|8 hours|[ ]Database|Service that handles the ordering lists
 #7|Discount| Less important|[ ]|8 hours|[ ]Inventory management| Service that can handle temporary pricing rules
-######Footnote: The features can be divided to sub-features. The time estimation guesses are referring to the amount of time needed, to make a stable build with every dependency (what is not listed uniquely).
+###### Footnote: The features can be divided to sub-features. The time estimation guesses are referring to the amount of time needed, to make a stable build with every dependency (what is not listed uniquely).
 
-###Some descriptions:
+### Some descriptions:
 
-####Infrastructure and general principles:
+#### Infrastructure and general principles:
 * In our case we need a solution with High Availability. This denotes, that it should be scalable. Accordingly i propose to go from the beginning with containerized services and container orchestration tools.
 * The concept of the solution is a service mesh, where every part plays it's on part independently. With this we can avoid the problems of Monolith softwares, while we can make it easily scalable and updatable.
 * As most of the services' containers/pods are so called Statless(every request handled as a new), we gain the ability to easily replace every unhealthy container with an identical new one or a newly released one automatically.
@@ -33,9 +33,9 @@
    * The reason for this: As i mentioned above, the containerized solutions are basically have no state, so if a pod dies, everything in the pod will be lost. To avoid this, we can tell the service where we store the data. The same applies to 
      that scenario, when the whole cluster dies.
      
-###Coding part:
+### Coding part:
 
-####Devops best-practices and tools to implement:
+#### Devops best-practices and tools to implement:
 1. DevSecOps lifecycle - Used tools - Used methods:
    * Plan: Jira - Sprints/Gantt chart(Roadmap)
    * Code: Whatever IDE - Language based coding style conventions, 
@@ -45,21 +45,21 @@
    * Deploy: ?Octopus deploy? - For implementing a public test phase we should implement a green/blue deployment method
    * Monitoring: Prometheus, Istio, Traefik mesh - Follow-up of currently used releases
 
-######Notes: Preferred to use an identical environment for development and for production</br>Green/Blue deployment in practice works like the currently used release is the blue, and after deploying a new release we won't redirect all the users instantly, just an amount of them, to utilize a beta testing while it is a production ready release. If everything works fine with time we redirect all the users, and the current green deployment will become the blue one.
+###### Notes: Preferred to use an identical environment for development and for production</br>Green/Blue deployment in practice works like the currently used release is the blue, and after deploying a new release we won't redirect all the users instantly, just an amount of them, to utilize a beta testing while it is a production ready release. If everything works fine with time we redirect all the users, and the current green deployment will become the blue one.
 
-######Footnote: We need a developer meeting to discuss our CI/CD pipeline
+###### Footnote: We need a developer meeting to discuss our CI/CD pipeline
 2. Code Review and release management:
    * After every sprint I would like to have a code review session, where we sit down with each others code, and make comments with questions suggestions.
    * As a coding workflow I would ask the coder team to use gitflow
      https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 
-####Architecture:
+#### Architecture:
    ?If event-driven:
       * Message broker needed, but we can make it more secure and stable, as the parts will become loosly coupled
    ?If RESTful:
       * Less pain to plan and implement
 
-####Connecting services through:
+#### Connecting services through:
 ?If CRUD:</br>
    * GraphQL: https://graphql.org/ or
    * JSON: However JSON is plain-text, hereby carries some obvious vulnerabilities from the aspect of security
