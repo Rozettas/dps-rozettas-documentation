@@ -60,9 +60,11 @@
       * Less pain to plan and implement
 
 #### Connecting services through:
+
 ?If CRUD:</br>
    * GraphQL: https://graphql.org/ or
-   * JSON: However JSON is plain-text, hereby carries some obvious vulnerabilities from the aspect of security</br>
+   * JSON: However JSON is plain-text, hereby carries some obvious vulnerabilities from the aspect of security
+
 ?If Protocol Buffer:
    * The communication between services are binaries, so it is partially encoded.
    * The implementation involves extra steps
