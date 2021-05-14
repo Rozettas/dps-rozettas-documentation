@@ -63,7 +63,7 @@
 
 #### Connecting services through:
 
-?If CRUD:</br>
+?If CRUD:
    * GraphQL: https://graphql.org/ or
    * JSON: However JSON is plain-text, hereby carries some obvious vulnerabilities from the aspect of security
 
