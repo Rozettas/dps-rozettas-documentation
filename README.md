@@ -4,7 +4,9 @@
 1. This documentation contains all the features what are approved by the team
 2. Use the Issue tab to make feature request, and make suggestions about the current features
    * Before opening a feature discussion, please check if the feature already has a thread
-   * Please in the title of thread refer to the feature ID, and the feature name###Feature list
+   * Please in the title of thread refer to the feature ID, and the feature name
+
+###Feature list
 
 ###### NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
 
