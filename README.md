@@ -13,12 +13,6 @@
 |ID|Feature name|Feature importance|Done|Estimated implementation time(hours)| Dependencies|Description
 | ---:| --- | --- | --- | --- | --- | --- |
 #1|Infrastructure|Essential|[ ]| 16 hours| | The IT infrastructure of the webshop
-#2|Database|Very important|[ ]|3 hours| [ ] Infrastructure| The database itself stores and manages every dataset we need
-#3|Customer|Very important|[ ]|6 hours|[ ] Database| Service that handles sensitive customer data
-#4|Seller|Very important|[ ]| 8 hours| [ ] Database| Service that handles sensitive seller data
-#5|Inventory management|Important|[ ]|16 hours|[ ] Seller| Service that can track the state of the sellers' inventory, possible third-party connections
-#6|Shopping cart|Moderately important|[ ]|8 hours|[ ] Database|Service that handles the ordering lists
-#7|Discount| Less important|[ ]|8 hours|[ ] Inventory management| Service that can handle temporary pricing rules
 ###### Footnote: The features can be divided to sub-features. The time estimation guesses are referring to the amount of time needed, to make a stable build with every dependency (what is not listed uniquely).
 
 ### Some descriptions:
