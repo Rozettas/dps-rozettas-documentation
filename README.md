@@ -6,7 +6,7 @@
    * Before opening a feature discussion, please check if the feature already has a thread
    * Please in the title of thread refer to the feature ID, and the feature name
 
-###Feature list
+### Feature list
 
 ###### NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
 
@@ -26,7 +26,7 @@
 #### Infrastructure and general principles:
 * In our case we need a solution with High Availability. This denotes, that it should be scalable. Accordingly i propose to go from the beginning with containerized services and container orchestration tools.
 * The concept of the solution is a service mesh, where every part plays it's on part independently. With this we can avoid the problems of Monolith softwares, while we can make it easily scalable and updatable.
-* As most of the services' containers/pods are so called Statless(every request handled as a new), we gain the ability to easily replace every unhealthy container with an identical new one or a newly released one automatically.
+* As most of the services' containers/pods are so called Stateless(every request handled as a new), we gain the ability to easily replace every unhealthy container with an identical new one or a newly released one automatically.
 * Living in a cluster has some more practical features, like:
    * Invisible for the outside world (We can of course open doors)
    * Based on our settings the load on the services is automatically split to maintain balance between the pod replicas.
