@@ -56,8 +56,10 @@
      https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 
 #### Architecture:
+
    ?If event-driven:
       * Message broker needed, but we can make it more secure and stable, as the parts will become loosly coupled
+
    ?If RESTful:
       * Less pain to plan and implement
 
