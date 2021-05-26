@@ -69,8 +69,9 @@
   Is the automatic process  that controlling the container lifecycle and health in a Cluster environment.
   
 
-* **DevOps lifecycle** (Software development (Dev) and IT operations (Ops)):
+* **DevSecOps lifecycle** (Software development (Dev) and IT operations (Ops)):
 
   The developer's path, consisting of operations and development practices, or a journey of product development from the start till the release.
-![](devsecops.png)
+  The **Sec**urity part ensures us, that the code itself qualifies to the security normatives.
+![DevSecOps Lifecycle](https://github.com/Rozettas/dps-rozettas-documentation/blob/main/DevSecOps.png)
   
