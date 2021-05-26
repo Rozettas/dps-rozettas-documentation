@@ -6,15 +6,6 @@
    * Before opening a feature discussion, please check if the feature already has a thread
    * Please in the title of thread refer to the feature ID, and the feature name
 
-### Feature list
-
-###### NOTE: Feature implementation roadmap should be controlled by the PM, base on the list of the features, and their noted importance.
-
-|ID|Feature name|Feature importance|Done|Estimated implementation time(hours)| Dependencies|Description
-| ---:| --- | --- | --- | --- | --- | --- |
-#1|Infrastructure|Essential|[ ]| 16 hours| | The IT infrastructure of the webshop
-###### Footnote: The features can be divided to sub-features. The time estimation guesses are referring to the amount of time needed, to make a stable build with every dependency (what is not listed uniquely).
-
 ### Some descriptions:
 
 #### Infrastructure and general principles:
@@ -52,15 +43,9 @@
 #### Architecture:
    ?If event-driven:
       * Message broker needed, but we can make it more secure and stable, as the parts will become loosly coupled
-   ?If RESTful:
-      * Less pain to plan and implement
 
 #### Connecting services through:
 
-?If CRUD:</br>
-   * GraphQL: https://graphql.org/ or
-   * JSON: However JSON is plain-text, hereby carries some obvious vulnerabilities from the aspect of security
-
-?If Protocol Buffer: (https://developers.google.com/protocol-buffers)
+Protocol Buffer: (https://developers.google.com/protocol-buffers)
    * The communication between services are binaries, so it is partially encoded.
    * The implementation involves extra steps
