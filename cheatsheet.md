@@ -72,5 +72,5 @@
 * **DevOps lifecycle** (Software development (Dev) and IT operations (Ops)):
 
   The developer's path, consisting of operations and development practices, or a journey of product development from the start till the release.
-![](./devsecops.png)
+![](devsecops.png)
   
