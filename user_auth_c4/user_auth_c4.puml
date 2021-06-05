@@ -1,0 +1,79 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title User authentication module context view
+center footer Made by Rozettas
+
+Person(User, "User", "User of the authentication system")
+System(Auth, "User authentication module", "Handle registration and login processes")
+System(MailServer, "E-mail system", "SMTP server")
+System(UserHandler, "User handler Mainframe", "Stores all the user related informations")
+Rel(User, Auth, "Register to the system, authenticate through login process")
+Rel(Auth, MailServer, "Sends email using")
+Rel(MailServer, User, "Sends email to")
+BiRel(Auth, UserHandler, "Evaluates user input")
+
+newpage
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title User authentication module container view
+center footer Made by Rozettas
+
+Person(User, "User", "User of the authentication system")
+System_Boundary(c1, "User authenticaton module") {
+    Container(FBHosting, "Firebase hosting", "fully managed", "Hosting service by google")
+    Container(SPA, "Single Page Application", "ReactJS", "Provide Login and Sign up page for the user")
+    Container(Auth, "Authentication service", "Python/Flask", "Handle registration and login requests")
+}
+System(MailServer, "E-mail system", "SMTP server")
+System(UserHandler, "User handler Mainframe", "Stores all the user related informations")
+Rel(User, FBHosting, "Visit aisin-dps.web.app/", "https")
+Rel(User, SPA, "Initiate registration/login process", "https")
+Rel_R(FBHosting, SPA, "Provide Single Page Application")
+Rel(SPA, Auth, "Send the data from the user input fields, and the method respectively", "JSON")
+BiRel(Auth, UserHandler, "Evaluate recieved user input based on stored data", "JSON")
+Rel_R(Auth, MailServer, "On successful registration rise an activation email sending proccess", "JSON")
+Rel_U(MailServer, User, "Send activation email")
+
+newpage
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title User authentication module: "Authentication Service" component view
+center footer Made by Rozettas
+
+Container(SPA, "Single Page Application", "ReactJS", "Provide Login and Sign up page for the user")
+Container_Boundary(c1, "Authentication Service") {
+    Component(SignUp, "Sign up controller", "Python/Flask", "Allows user to register to the system")
+    Component(Login, "Sign in controller", "Python/Flask", "Allows user to login to the system")
+    Component(ResetPass, "Reset password controller", "Python/Flask", "Allows user to start a password renewal process")
+    Component(Security, "Security", "Python/Pycrypto", "Provides functionality related to sign in, sign up, and password reset")
+    Component(Active, "Active session control", "Python/Flask, Redis", "Handles the active user sessions")
+}
+System(MailServer, "E-mail system", "SMTP server")
+System_Boundary(c2, "User handler mainframe") {
+    Container(DB, "User database", "MySQL", "Relational database to store user data")
+}
+Rel(SPA, SignUp, "Initiate registration process with the dataset provided by the user", "JSON")
+Rel(SPA, Login, "Initiate login process with the dataset provided by the user", "JSON")
+Rel(SPA, ResetPass, "Initiate password renewal process with the dataset provided by the user", "JSON")
+Rel(SignUp, Security, "Uses")
+Rel(Login, Security, "Uses")
+Rel(ResetPass, Security, "Uses")
+Rel(SignUp, MailServer, "Initiate activation email sending process")
+Rel(ResetPass, MailServer, "Initiate password renewal email sending process")
+Rel(Security, DB, "Forwards data to the user handler mainframe", "Updates & queries the database", "SQL")
+Rel(Security, Active, "Request a session ID for the active user")
+Rel_R(Active, SPA, "Responds with a session ID", "JSON")
+@enduml
