@@ -1,0 +1,91 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title Shop in shop context view
+center footer Made by Rozettas
+
+Person(User, "Person who interested in the tested solution")
+System(Sis, "Handle subscriptions and counts the reach times of page")
+System(Eval, "Evaluate the experiment based on the reaches and subscriptions")
+
+Rel(User, Sis, "Goes to the page and if the solution is interesting subscribe")
+Rel(Eval, Sis, "Grabs dataset of subscriptions and total reaches")
+
+newpage
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title Shop in shop - Subscription system container view
+center footer Made by Rozettas
+
+Person(User, "Person who interested in the tested solution")
+System(Eval, "Evaluate the experiment based on the reaches and subscriptions")
+Boundary(s1, Subscription system) {
+    Container(FBH, "Firebase hosting", "fully managed", "Hosting service by google")
+    Container(SPA, "Single-page Application", "React/JS", "Provide subscription method for the user")
+    Container(Sub, "Backend for handle subscriptions", "Go/net/Http", "Processes the subscription data provided by SPA send it into the database")
+    Container(DB, "No SQL database to store subscriptions", "Firestore", "Fully managed")
+}
+
+Rel(User, FBH, "User calls domain of the page", "https")
+Rel(FBH, SPA, "Provides Single-page application for the user")
+Rel(User, SPA, "User interacts with the subscription page", "https")
+Rel(SPA, Sub, "Sends request to log a reach", "JSON")
+Rel(SPA, Sub, "Sends request to log a subscription", "JSON")
+Rel(Sub, DB, "Sends subscription data to store", "JSON")
+Rel(Eval, DB, "Queries the number of subscriptions, number of reaches, and subscription data")
+
+newpage
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title Shop in shop - Single page application component view
+center footer Made by Rozettas
+
+Person(User, "Person who interested in the tested solution")
+Container(FBH, "Firebase hosting", "fully managed", "Hosting service by google")
+Container(Sub, "Backend for handle subscriptions", "Go/net/Http", "Processes the subscription data provided by SPA send it into the database")
+Boundary(c1, "Single-page Application") {
+    Component(Info, "Introduction", "React/JS", "Provide information about the service")
+    Component(Subpage, "Subscribe page", "React/JS", "Provides interface for subscribe")
+}
+
+Rel(FBH, Info, "Calls for the homepage")
+Rel(User, Info, "User decides to subscribe")
+Rel(Info, Subpage, "Calls")
+Rel(User, Subpage, "Fill out subscription form and submit it")
+Rel(Info, Sub, "Log a reach", "JSON")
+Rel(Subpage, Sub, "Send the subscription data", "JSON")
+
+newpage
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor red
+skinparam titleBackgroundColor aqua-CadetBlue
+title Shop in shop - Subscription module component view
+center footer Made by Rozettas
+
+Container(SPA, "Single-page Application", "React/JS", "Provide subscription method for the user")
+Container(DB, "No SQL database to store subscriptions", "Firestore", "Fully managed")
+Boundary(c1, "Backend for handle subscriptions", "Golang") {
+    Component(SubParse, "Subscription data handler", "Golang")
+    Component(Logger, "Page reach counter logger", "Golang")
+}
+
+Rel(SPA, Logger, "Send message about a new reach", "JSON")
+Rel(SPA, SubParse, "Sends data from the submitted subscription form", "JSON")
+Rel(Logger, DB, "Updates the number of reaches")
+Rel(SubParse, DB, "Appends a new entry for the subscription")
+@enduml
